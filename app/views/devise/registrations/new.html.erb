@@ -1,0 +1,19 @@
+<div class="border-form-div">
+<h2>Sign up</h2>
+
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), :html => { :class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+
+      <%= f.input :email, required: true, autofocus: true %>
+      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @validatable), :class => 'text_field' %>
+      <%= f.input :password_confirmation, required: true %>
+      <%= f.label :name %>
+      <%= f.text_field :name, :autofocus => true %>
+      <%= f.label :user_type %>
+      <%= f.select(:user_type,[['Developer','Developer'],['Manager','Manager'],['QA','QA']]) %>
+
+    <%= f.button :submit, "Sign up", :class => 'btn btn-primary' %>
+<% end %>
+
+<%= render "devise/shared/links" %>
+</div>

@@ -1,0 +1,30 @@
+<%= simple_form_for @project, :html => { :class => 'form-horizontal'} do |f|%>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Project</legend>
+    <div class="control-group">
+      <%= f.label :Title, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :title, :class => "text_field" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :decription, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :description, :class => 'text_field' %>  
+      </div>  
+    </div>
+    <div class="control-group">
+      <%= f.label :developers, :class => "control-label" %>
+      <div class="controls">
+        <%= f.collection_select :developers, @developers, :id, :name, {:selected => @project.developers},{:multiple => "true"} %>
+         <%#= f.input :developers,:collection => @developers,:label_method => :name,:value_method => :id,:label => "Location" ,:include_blank => false, :multiple => "multiple" %>
+         <%#= f.association :developers, collection: @developers, input_html: { class: 'multiselectuser',  multiple: "multiple"} %>
+         <%#= f.select :developers, 
+            options_from_collection_for_select(@developers, :id, :name),{},{multiple: 'multiple'}%>
+      </div>  
+    </div>
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+  </fieldset>
+<% end %>

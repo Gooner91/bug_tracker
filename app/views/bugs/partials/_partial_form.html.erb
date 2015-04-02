@@ -1,0 +1,67 @@
+<%= simple_form_for [@project,@bug], :html => { :class => 'form-horizontal',:multipart => true } do |f|%>
+  <fieldset>
+    <legend><%= controller.action_name.capitalize %> Bug</legend>
+    <div class="control-group">
+      <%= f.label :Title, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :title, :class => "text_field" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :decription, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :description, :class => 'text_field' %>  
+      </div>  
+    </div>  
+    <div class="control-group">
+      <%= f.label :bug_type, :class => "control-label" %>
+      <div class="controls">
+        <% if @bug.new_record? %>
+          <%= f.radio_button(:bug_type, "feature", :class => "radio_group", :checked => "checked") %>
+        <% else %>
+          <%= f.radio_button(:bug_type, "feature", :class => "radio_group") %>
+        <% end %>  
+        <%= f.label(:bug_type_feature, "Feature") %>
+        <%= f.radio_button(:bug_type, "bug", :class => "radio_group") %>
+        <%= f.label(:bug_type_bug, "Bug") %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :deadline, :class => "control-label"%>
+      <div class="controls">
+        <%= f.date_select :deadline,:start_year => 2015%>
+      </div>
+    </div>  
+    <div class="control-group">
+      <%= f.label :status, :class => "control-label" %>
+      <div class="controls">
+      <% if @bug.new_record? %>
+        <%= render :partial => "bugs/partials/new_dropdown", :locals=>{:f=>f} %>
+      <% else %>  
+        <% if @bug.bug_type=='feature' %>
+          <%= render :partial => "bugs/partials/feature_dropdown", :locals=>{:f=>f} %>
+        <% end %>  
+        <% if @bug.bug_type=='bug' %>
+          <%= render :partial => "bugs/partials/bug_dropdown", :locals=>{:f=>f} %>
+        <% end %>  
+      <% end %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :developer_id, :class => "control-label" %>
+      <div class="controls">
+        <%= f.collection_select :developer_id, @developers, :id, :name %>
+        <%= f.hidden_field :creator_id, :value => current_user.id %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :image, :class => "control-label" %>
+      <div class="controls">
+        <%= f.file_field :image %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+    </div>
+  </fieldset>
+<% end %>

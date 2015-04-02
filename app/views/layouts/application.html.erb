@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BugTracker</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+        <a class="close" data-dismiss="alert">x</a>
+        <%= msg  %>
+      </div>
+    <% end %>
+    <% if user_signed_in? %>
+     <span>Signed in as <%= current_user.email %></span> <%=link_to "Logout", destroy_user_session_path, method: 'delete'%>  
+    <% end %> 
+    <%= yield %>
+  </div>
+</body>
+</html>

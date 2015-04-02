@@ -1,0 +1,39 @@
+<legend>Bug Detail</legend>
+<div class="span9">
+  <div class="control-group">
+    <b>Title:</b>
+    <div class="controls">
+      <%= @bug.title %>  
+    </div>  
+  </div>
+  <div class="control-group">
+    <b>Description:</b>
+    <div class="controls">
+      <%= @bug.description %>  
+    </div>  
+  </div>
+  <div class="control-group">
+    <b>Deadline:</b>
+    <div class="controls">
+      <%= @bug.deadline %>  
+    </div>  
+  </div>
+  <div class="control-group">
+    <b>Type:</b>
+    <div class="controls">
+      <%= @bug.bug_type %>  
+    </div>  
+  </div>
+  <div class="control-group">
+    <b>Status:</b>
+    <div class="controls">
+      <%= @bug.status %>  
+    </div>  
+  </div>
+</div>
+<div class="span3">
+  <% if @bug.image.present? %>
+    <%= image_tag @bug.image_url(:thumb).to_s %>
+  <% end %>
+</div>
+  
